@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$(".led").click(function(){
-				var p = $(this).attr('id'); // get id value (i.e. pin13)
+				var p = $(this).attr('id'); // get id value
 				$.get("http://10.4.51.21/LED=ON", {pin:p}); // eksekusi get request
 			});
 		});
