@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>SimpleSmartParking</title>
+	</head>
+	<body>
+	<button id="13" class="led">Toggle Pin 13</button> <!-- pin 13 -->
+
+	<script src="jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".led").click(function(){
+				var p = $(this).attr('id'); // get id value (i.e. pin13)
+				$.get("http://10.4.51.21/LED=ON", {pin:p}); // eksekusi get request
+			});
+		});
+	</script>
+	</body>
+</html>
