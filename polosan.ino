@@ -23,14 +23,14 @@ void loop() {
 
   if (distance <= 30) {
     digitalWrite(led, HIGH);
-    Serial.println("lagi ada mobil");
+    Serial.println("lagi ada mobil :-(");
 }
   else {
     digitalWrite(led,LOW);
   }
 
   if (distance > 30){
-    Serial.println("Ga ada mobil");
+    Serial.println("Lagi kosong bro :-)");
   }
   else {
     Serial.print(distance);
