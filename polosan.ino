@@ -1,4 +1,4 @@
-#define trigPin 7
+#define trigPin 8
 #define echoPin 6
 #define led 13
 
@@ -21,20 +21,20 @@ void loop() {
   distance = (duration/2) / 29.1;
  
 
-  if (distance <= 30) {
-    digitalWrite(led, HIGH);
+  if (distance <= 10) {
+    digitalWrite(led, LOW);
     Serial.println("lagi ada mobil :-(");
 }
   else {
-    digitalWrite(led,LOW);
+    digitalWrite(led,HIGH);
   }
 
-  if (distance > 30){
+  if (distance > 10){
     Serial.println("Lagi kosong bro :-)");
   }
   else {
-    Serial.print(distance);
-    Serial.println(" cm");
+   // Serial.print(distance);
+    Serial.println("Anda kurang beruntung");
    
   }
   delay(500);
