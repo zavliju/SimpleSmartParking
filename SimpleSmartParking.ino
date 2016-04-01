@@ -1,11 +1,11 @@
 #include <ESP8266WiFi.h>
 
-const chart* ssid = "";//isi nama wifi
+const char* ssid = "";//isi nama wifi
 const char* password = "";//isi pass
 
-int ledPin = 13;
-int trigPin = 7;
-int trigPin = 6;
+int ledPin = 15;
+int trigPin = 12;
+int echoPin = 14;
 
 WiFiServer server(80);
 
@@ -38,7 +38,7 @@ void setup() {
 
     //Cetak IP address
     Serial.print("URL-nya adalah :");
-    Serial.print("http://")
+    Serial.print("http://");
     Serial.print(WiFi.localIP());
     Serial.println("/");
     
@@ -46,7 +46,16 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  
+  long duration, distance;
+  digitalWrite(trigPin, LOW); 
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration/2) / 29.1;
+ 
   // Cek apakah client sudah terhubung
   WiFiClient client = server.available();
   if (!client) {
@@ -65,5 +74,40 @@ void loop() {
   client.flush();
 
   //mulai kodingan utama
-  
+  //set request
+
+ int value = HIGH;
+  if (request.indexOf("/KOSONG") != -1)  {
+    digitalWrite(ledPin, HIGH);
+    value = HIGH;
+  }
+  if (request.indexOf("/ISI") != -1)  {
+    digitalWrite(ledPin, LOW);
+    value = LOW;
+  }
+
+  //set response
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-Type: text/html");
+  client.println("");
+  client.println("<!DOCTYPE HTML>");
+  client.println("<html>");
+
+  client.print("Sisa slot parkiran : ");
+
+   if(value == HIGH) {
+    client.print("1 :-) ");
+  } else {
+    client.print("Off :-( ");
+  }
+
+//  client.println("<br><br>");
+//  client.println("<a href=\"/LED=ON\"\"><button>Turn On </button></a>");
+//  client.println("<a href=\"/LED=OFF\"\"><button>Turn Off </button></a><br />");  
+//  client.println("</html>");
+
+  delay(1);
+  Serial.println("Client disonnected");
+  Serial.println("");
+ 
 }
