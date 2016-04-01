@@ -3,14 +3,14 @@
 		<title>SimpleSmartParking</title>
 	</head>
 	<body>
-	<button id="13" class="led">Toggle Pin 13</button> <!-- pin 13 -->
+	<button id="13" class="led">Toggle Pin 15</button> <!-- pin 15 -->
 
 	<script src="jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$(".led").click(function(){
 				var p = $(this).attr('id'); // get id value
-				$.get("http://10.4.51.21/LED=ON", {pin:p}); // eksekusi get request
+				$.get("http://......./KOSONG", {pin:p}); // eksekusi get request
 			});
 		});
 	</script>
