@@ -3,9 +3,9 @@
 const char* ssid = "";//isi nama wifi
 const char* password = "";//isi pass
 
-int ledPin = 15;
-int trigPin = 12;
-int echoPin = 14;
+int ledPin = 15; //D8
+int trigPin = 12; //D6
+int echoPin = 14; //D5
 
 WiFiServer server(80);
 
@@ -14,8 +14,9 @@ void setup() {
   Serial.begin(115200);
   delay(10);
 
-  //pendefinisian menghidupkan dan mematikan lampu
   pinMode(ledPin, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
   digitalWrite(ledPin, LOW);
 
   //Connect ke WiFi
@@ -26,36 +27,36 @@ void setup() {
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
-      delay(500);
-      Serial.print(".");
-    }
-    Serial.println("");
-    Serial.println("WiFi tersambung");
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("WiFi tersambung");
 
-    //Memulai menjalankan server
-    server.begin();
-    Serial.println("Server Mulai beroperasi");
+  //Memulai menjalankan server
+  server.begin();
+  Serial.println("Server Mulai beroperasi");
 
-    //Cetak IP address
-    Serial.print("URL-nya adalah :");
-    Serial.print("http://");
-    Serial.print(WiFi.localIP());
-    Serial.println("/");
-    
+  //Cetak IP address
+  Serial.print("URL-nya adalah :");
+  Serial.print("http://");
+  Serial.print(WiFi.localIP());
+  Serial.println("/");
+
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
+
   long duration, distance;
-  digitalWrite(trigPin, LOW); 
+  digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);
-  distance = (duration/2) / 29.1;
- 
+  distance = (duration / 2) / 29.1;
+
   // Cek apakah client sudah terhubung
   WiFiClient client = server.available();
   if (!client) {
@@ -64,7 +65,7 @@ void loop() {
 
   // Menunggu sampai klien mengirim data
   Serial.println("client baru");
-  while(!client.available()){
+  while (!client.available()) {
     delay(1);
   }
 
@@ -74,16 +75,17 @@ void loop() {
   client.flush();
 
   //mulai kodingan utama
-  //set request
+  //set request <- masih ada yang salah kayaknya
 
- int value = HIGH;
-  if (request.indexOf("/KOSONG") != -1)  {
+  int value = HIGH;
+  if (distance > 30 && request.indexOf("/KOSONG") != -1)  {
     digitalWrite(ledPin, HIGH);
     value = HIGH;
   }
-  if (request.indexOf("/ISI") != -1)  {
+  if (distance <= 30 && request.indexOf("/ISI") != -1)  {
     digitalWrite(ledPin, LOW);
     value = LOW;
+    Serial.print(distance);
   }
 
   //set response
@@ -95,19 +97,18 @@ void loop() {
 
   client.print("Sisa slot parkiran : ");
 
-   if(value == HIGH) {
+  if (distance > 30) {
     client.print("1 :-) ");
   } else {
-    client.print("Off :-( ");
+    client.print("0 :-( ");
   }
 
-//  client.println("<br><br>");
-//  client.println("<a href=\"/LED=ON\"\"><button>Turn On </button></a>");
-//  client.println("<a href=\"/LED=OFF\"\"><button>Turn Off </button></a><br />");  
-//  client.println("</html>");
+  client.println("<br><br>");
+  client.println("<a href=\""><button>Tunjukan jalan </button></a><br />");
+  client.println("</html>");
 
   delay(1);
   Serial.println("Client disonnected");
   Serial.println("");
- 
+
 }
