@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "";//isi nama wifi
-const char* password = "";//isi pass
+const char* ssid = "Hotspotname";//isi nama wifi
+const char* password = "password";//isi pass
 
 int ledPin = 15; //D8
 int trigPin = 12; //D6
@@ -104,7 +104,7 @@ void loop() {
   }
 
   client.println("<br><br>");
-  client.println("<a href=\""><button>Tunjukan jalan </button></a><br />");
+  client.println("<a href=\"/HTTPS:\\Facebook.com\"\"><button>Tunjukan jalan </button></a><br />");
   client.println("</html>");
 
   delay(1);
