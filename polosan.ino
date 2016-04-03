@@ -1,9 +1,9 @@
-#define trigPin 8
-#define echoPin 6
-#define led 13
+#define trigPin 12
+#define echoPin 14
+#define led 15
 
 void setup() {
-  Serial.begin (9600);
+  Serial.begin (115200);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   pinMode(led, OUTPUT);
@@ -21,16 +21,16 @@ void loop() {
   distance = (duration/2) / 29.1;
  
 
-  if (distance <= 10) {
-    digitalWrite(led, LOW);
-    Serial.println("lagi ada mobil :-(");
+  if (distance <= 30) {
+    digitalWrite(led, HIGH);
+    Serial.println("Sisa 0 :-(");
 }
   else {
-    digitalWrite(led,HIGH);
+    digitalWrite(led,LOW);
   }
 
-  if (distance > 10){
-    Serial.println("Lagi kosong bro :-)");
+  if (distance > 30){
+    Serial.println("Sisa 1 :-)");
   }
   else {
    // Serial.print(distance);
