@@ -94,21 +94,55 @@ void loop() {
   client.println("");
   client.println("<!DOCTYPE HTML>");
   client.println("<html>");
-
-  client.print("Sisa slot parkiran : ");
-
+  client.println("<head>");
+  client.println("<style>");
+    
+  client.println("table, th, td {");
+  client.println("border: 1px solid black;");
+  client.println("border-collapse: collapse;");
+  client.println("}");
+    
+  client.println("th, td {");
+  client.println("padding: 10px;");
+  client.println("}");
+  client.println("</style>");
+    
+  client.println("<script type="text/javascript">");
+  client.println("setInterval("my_function();",2000);");
+  client.println("function my_function(){");
+  client.println("window.location = location.href;");
+  client.println("}");
+  client.println("</script>");
+  client.println("</head>");
+    
+  client.println("<title>");
+  client.println("Selamat datang di Simple Smart Parking");
+  client.println("</title>");
+    
+  client.println("<table style="width:100%">");
+  client.println("<tr><td>");
+  client.println("Sisa slot parkiran :");
+  client.println("</td>");
+  client.println("<td>");    
   if (distance > 30) {
     client.print("1 :-) ");
   } else {
     client.print("0 :-( ");
   }
+  client.println("</td></tr>");
+    
+  client.println("<tr><td>");
+  client.println("Biaya");
+  client.println("</td>");
+  client.println("<td>");
+    //buat hitungan biaya masukin kesini
+  client.println("</td></tr>");
 
   client.println("<br><br>");
-  client.println("<a href=\"/HTTPS:\\Facebook.com\"\"><button>Tunjukan jalan </button></a><br />");
+  client.println("<a href="https:\\maps.google.com.com\"><button>Tunjukan jalan</button></a><br />");
   client.println("</html>");
 
   delay(1);
   Serial.println("Client disonnected");
   Serial.println("");
-
 }

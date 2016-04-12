@@ -1,18 +1,46 @@
+<!DOCTYPE HTML>
 <html>
-	<head>
-		<title>SimpleSmartParking</title>
-	</head>
-	<body>
-	<button id="13" class="led">Toggle Pin 15</button> <!-- pin 15 -->
-
-	<script src="jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$(".led").click(function(){
-				var p = $(this).attr('id'); // get id value
-				$.get("http://......./KOSONG", {pin:p}); // eksekusi get request
-			});
-		});
-	</script>
-	</body>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+}
+</style>
+<script type="text/javascript">
+    setInterval("my_function();",2000); 
+        
+    function my_function(){
+        window.location = location.href;
+    }
+</script>
+</head>
+<body>
+    <title>
+        Selamat datang di Simple Smart Parking
+    </title>
+<table style="width:100%">
+  <tr>
+    <td>
+Sisa slot parkiran
+    </td>
+      <td>
+            
+      </td>
+  </tr>
+    <tr>
+        <td>
+            Biaya
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+    <br><br>
+    <a href="https:\\maps.google.com\"><button>Tunjukan jalan</button></a><br />
+    
+</body>
 </html>
