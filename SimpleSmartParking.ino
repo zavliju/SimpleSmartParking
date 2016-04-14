@@ -105,20 +105,39 @@ void loop() {
   client.println("th, td {");
   client.println("padding: 10px;");
   client.println("}");
+
+  client.println("header {");
+  client.println("background-color:blue;");
+  client.println("color:white;");
+  client.println("font-size: 24px;");
+  client.println("text-align:center;");
+  client.println("padding:5px; }");
+    
+  client.println("section {");
+  client.println("width:350px;");
+  client.println("float:left;");
+  client.println("padding:10px; }");
+
   client.println("</style>");
     
   client.println("<script type='text/javascript'>");
-  client.println("setInterval('my_function();',2000);");
+  client.println("setInterval('my_function();',5000);");
   client.println("function my_function(){");
   client.println("window.location = location.href;");
   client.println("}");
   client.println("</script>");
   client.println("</head>");
+  client.println("<body>");
     
   client.println("<title>");
   client.println("Selamat datang di Simple Smart Parking");
   client.println("</title>");
     
+  client.println("<header>");
+  client.println("Simple Smart Parking");
+  client.println("</header>");
+    
+  client.println("<section>");
   client.println("<table style='width:100%'>");
   client.println("<tr><td>");
   client.println("Sisa slot parkiran :");
@@ -142,15 +161,43 @@ void loop() {
     client.print("IDR 10000 ");
   }
   client.println("</td></tr>");
-  
+  client.println("</table>");
+  client.println("<br>");
+  client.println("<a href='https:\\maps.google.com.com\' target='_blank'><button>Tunjukan jalan</button></a><br />");
+  client.println("</section");
+    
+  client.println("<section>");
+  client.println("<table>");
   client.println("<tr><td>");
-  client.println("Tarif :");
-  client.println(" 1 Jam pertama IDR 10000");
-  client.println("Perjam berikutnya IDR 7500");
-  client.println("</td>");
-  client.println("</tr>");
-  client.println("<br><br>");
-  client.println("<a href='https:\\maps.google.com.com\'><button>Tunjukan jalan</button></a><br />");
+  client.println("TARIF PARKIR MOBIL");
+  client.println("</td></tr>");
+  client.println("<tr><td>");
+  client.println("1 (satu) jam pertama Rp. 10000");
+  client.println("</td></tr>");
+  client.println("<tr><td>");
+  client.println("Setiap jam berikutnya Rp. 7000");
+  client.println("</td></tr>");
+  client.println("</table>");
+  client.println("</section>");
+    
+      
+  client.println("<section>");
+  client.println("<table>");
+  client.println("<tr><td>");
+  client.println("PROMO");
+  client.println("</td></tr>");
+  client.println("<tr><td>");
+  client.println("Setiap hari Senin dan Rabu");
+  client.println("</td></tr>");
+  client.println("<tr><td>");
+  client.println("1 (satu) jam pertama hanya Rp. 8000");
+  client.println("</td></tr>");
+  client.println("<tr><td>");
+  client.println("Setiap jam berikutnya Rp. 3000");
+  client.println("</td></tr>");
+  client.println("</table>");
+  client.println("</section>");
+  client.println("</body>");
   client.println("</html>");
 
   delay(1);
